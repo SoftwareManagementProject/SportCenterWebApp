@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Trainer>
+
+@{
+    ViewData["Title"] = "Trainers";
+}
+
+
+<style>
+    body {
+        font-family: sans-serif;
+    }
+
+    .emptyforTrainers {
+        margin-bottom: 100px;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    hr {
+        margin-bottom: 50px;
+    }
+
+    .col-sm-12 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .card {
+        margin-bottom: 50px;
+    }
+
+    img {
+        height: 250px;
+    }
+</style>
+
+<div class="emptyforTrainers"></div>
+
+<div class="container">
+    <div class="row">
+        <h1 style="color: #62c8d2;">IronSculpt GYM Trainers</h1>
+        <hr>
+        @foreach(var trainer in Model)
+        {
+            <div class="col-sm-12 col-lg-4">
+                <div class="card border-info" style="width: 18rem; height: 400px;">
+               <img src="/images/@trainer.TrainerImage" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">@trainer.NameSurname</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                </div>
+            </div>
+        } 
+
+    </div>
+</div>

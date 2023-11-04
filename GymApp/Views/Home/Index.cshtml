@@ -1,0 +1,76 @@
+﻿@model List<CategoryDescriptionImageViewModel>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+    
+<section id="homeCarousel">
+    <div id="carouselExample" class="carousel slide">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="images/1.png" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="images/2.png" class="d-block w-100" alt="...">
+            </div>
+
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+</section>
+
+<h1 id="index-h1">Select The Best Sport For You</h1>
+<section id="cardPart">
+
+    <div class="container">
+
+        <div class="row">
+            
+      
+            @for (int i = 0; i < 3; i++)
+            {
+                <div class="col-sm-12 col-lg-4">
+                    <div class="card border-info" style="width: 18rem; height: 400px;">
+                        <img src="/images/@Model[i].CategoryImages[i]" class="card-img-top" style="height: 200px;">
+                        <div class="card-body">
+                            <h5 class="card-title">@Model[i].CategoryName</h5>
+                            <p class="card-text">@Model[i].CategoryInfo</p>
+                            <a href="/@Model[i].CategoryName?categoryId=@Model[i].CategoryId" class="btn btn-primary">More Information</a>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+            
+        <div class="row">
+            @for (int i = 3; i < 5; i++)
+            {
+                <div class="col-sm-12 col-lg-6">
+                    <div class="card border-info" style="width: 18rem; height: 400px;">
+                        <img src="/images/@Model[i].CategoryImages[0]" class="card-img-top" style="height: 200px;">
+                        <div class="card-body">
+                            <h5 class="card-title">@Model[i].CategoryName</h5>
+                            <p class="card-text">@Model[i].CategoryInfo</p>
+                            <a href="/@Model[i].CategoryName?categoryId=@Model[i].CategoryId" class="btn btn-primary">More Information</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+
+    
+
+
+

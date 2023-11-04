@@ -1,0 +1,34 @@
+﻿@model Contact
+
+<style>
+    body {
+        font-family: sans-serif;
+    }
+
+    .emptyArea {
+        width: 100%;
+        height: 100px;
+    }
+</style>
+
+<div class="emptyArea"></div>
+<div class="container">
+    <center>
+        <h1 style="color: #62c8d2;">Contact Us</h1>
+
+        <form asp-controller="Home" asp-action="Contact" method=post>
+
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Email address</label>
+            <input asp-for="ContactEmail" type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+          </div>
+   
+          <div class="form-group">
+            <label for="exampleFormControlTextarea1">Example textarea</label>
+            <textarea asp-for="ContactContent" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+          </div>
+            <button type="submit" class="btn btn-success">SEND</button>
+        </form>
+    </center>
+</div>
+
