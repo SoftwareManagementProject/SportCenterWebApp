@@ -2,10 +2,12 @@
 using BusinessLayer.ValidationRules;
 using EntityLayer.Concrete;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GymApp.Controllers
 {
+    [AllowAnonymous]
     public class RegisterController : Controller
     {
         private IMemberService _memberService;

@@ -93,8 +93,9 @@ namespace GymApp.Controllers
             
             return View();
         }
-        [Route("/Fitness/{id?}")]
-        public IActionResult Fitness(int categoryId)
+
+        [Route("/Sport/{id?}")]
+        public IActionResult Sport(int categoryId)
         {
             var model = new CategoryDescriptionImageViewModel();
 
@@ -109,70 +110,7 @@ namespace GymApp.Controllers
 
             return View(model);
         }
-        [Route("/Kickbox/{id?}")]
-        public IActionResult Kickbox(int categoryId)
-        {
 
-            var model = new CategoryDescriptionImageViewModel();
 
-            var kickbox = _categoryService.GetWithDescriptionAndImageById(categoryId);
-            model.CategoryId = kickbox.CategoryId;
-            model.CategoryName = kickbox.CategoryName;
-            model.CategoryInfo = kickbox.CategoryInfo;
-            model.CategoryPrice = kickbox.CategoryPrice;
-            model.CategoryDescriptions = kickbox.Descriptions!.Where(x => x.CategoryId == kickbox.CategoryId).Select(x => x.DescriptionName).ToList();
-            model.CategoryImages = kickbox.Images!.Where(x => x.CategoryId == kickbox.CategoryId).Select(x => x.ImageName).ToList();
-
-            return View(model);
-        }
-
-        [Route("/Pilates/{id?}")]
-        public IActionResult Pilates(int categoryId)
-        {
-            var model = new CategoryDescriptionImageViewModel();
-
-            var pilates = _categoryService.GetWithDescriptionAndImageById(categoryId);
-            model.CategoryId = pilates.CategoryId;
-            model.CategoryName = pilates.CategoryName;
-            model.CategoryInfo = pilates.CategoryInfo;
-            model.CategoryPrice = pilates.CategoryPrice;
-            model.CategoryDescriptions = pilates.Descriptions!.Where(x => x.CategoryId == pilates.CategoryId).Select(x => x.DescriptionName).ToList();
-            model.CategoryImages = pilates.Images!.Where(x => x.CategoryId == pilates.CategoryId).Select(x => x.ImageName).ToList();
-
-            return View(model);
-        }
-
-        [Route("/Zumba/{id?}")]
-        public IActionResult Zumba(int categoryId)
-        {
-
-            var model = new CategoryDescriptionImageViewModel();
-
-            var zumba = _categoryService.GetWithDescriptionAndImageById(categoryId);
-            model.CategoryId = zumba.CategoryId;
-            model.CategoryName = zumba.CategoryName;
-            model.CategoryInfo = zumba.CategoryInfo;
-            model.CategoryPrice = zumba.CategoryPrice;
-            model.CategoryDescriptions = zumba.Descriptions!.Where(x => x.CategoryId == zumba.CategoryId).Select(x => x.DescriptionName).ToList();
-            model.CategoryImages = zumba.Images!.Where(x => x.CategoryId == zumba.CategoryId).Select(x => x.ImageName).ToList();
-
-            return View(model);
-        }
-
-        [Route("/Coaching/{id?}")]
-        public IActionResult Coaching(int categoryId)
-        {
-            var model = new CategoryDescriptionImageViewModel();
-
-            var coaching = _categoryService.GetWithDescriptionAndImageById(categoryId);
-            model.CategoryId = coaching.CategoryId;
-            model.CategoryName = coaching.CategoryName;
-            model.CategoryInfo = coaching.CategoryInfo;
-            model.CategoryPrice = coaching.CategoryPrice;
-            model.CategoryDescriptions = coaching.Descriptions!.Where(x => x.CategoryId == coaching.CategoryId).Select(x => x.DescriptionName).ToList();
-            model.CategoryImages = coaching.Images!.Where(x => x.CategoryId == coaching.CategoryId).Select(x => x.ImageName).ToList();
-
-            return View(model);
-        }
     }
 }
