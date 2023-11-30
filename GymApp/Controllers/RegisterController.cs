@@ -26,21 +26,21 @@ namespace GymApp.Controllers
         [HttpPost]
         public IActionResult Index(Member member)
         {
-            MemberValidator memberValidator = new MemberValidator();
-            ValidationResult results = memberValidator.Validate(member);
-            if(results.IsValid)
-            {
-                member.MemberStatus = true;
-                _memberService.Add(member);
-                return RedirectToAction("Index", "Home");
-            }
-            else
-            {
-                foreach(var item in results.Errors)
-                {
-                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
-                }
-            }
+            //MemberValidator memberValidator = new MemberValidator();
+            //ValidationResult results = memberValidator.Validate(member);
+            //if(results.IsValid)
+            //{
+            //    member.MemberStatus = true;
+            //    _memberService.Add(member);
+            //    return RedirectToAction("Index", "Home");
+            //}
+            //else
+            //{
+            //    foreach(var item in results.Errors)
+            //    {
+            //        ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+            //    }
+            //}
 
             return View();
         }

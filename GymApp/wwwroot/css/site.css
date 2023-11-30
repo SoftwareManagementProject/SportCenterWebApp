@@ -74,6 +74,9 @@ body {
 
 .card {
     margin-bottom: 50px;
+    border: none;
+    border-radius: 0;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
 }
 
 #footerPart {
@@ -87,4 +90,38 @@ body {
     #footerPart img {
         width: 30px;
         height: 30px;
+    }
+
+
+.container {
+    margin-top: 50px;
+}
+
+
+.card-price {
+    font-size: 2rem;
+    color: #007bff;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    color: #495057;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.period {
+    font-size: 0.75rem;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
     }

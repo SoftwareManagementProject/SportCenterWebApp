@@ -12,7 +12,7 @@
 </style>
 
 <div class="emptyArea"></div>
-<div class="container">
+<div class="container mx-auto w-50 ">
     <center>
         <h1 style="color: #62c8d2;">Contact Us</h1>
 
@@ -22,13 +22,14 @@
             <label for="exampleFormControlInput1">Email address</label>
             <input asp-for="ContactEmail" type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
           </div>
-   
+
           <div class="form-group">
             <label for="exampleFormControlTextarea1">Example textarea</label>
             <textarea asp-for="ContactContent" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
           </div>
-            <button type="submit" class="btn btn-success">SEND</button>
+            <button type="submit" class="btn btn-success btn-lg mt-3">SEND</button>
         </form>
     </center>
-</div>
 
+</div>
+<div class="myDiv" style="margin-bottom:100px;"></div>

@@ -29,6 +29,7 @@ namespace GymApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(LoginViewModel model)
         {
+            var username = User.Identity.Name;
             //var member = _memberService.GetByEmailAndPassword(model.Email, model.Password);
             //if (member != null)
             //{

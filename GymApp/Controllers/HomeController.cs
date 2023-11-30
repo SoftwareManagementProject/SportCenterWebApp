@@ -66,6 +66,19 @@ namespace GymApp.Controllers
             return View();
         }
 
+        [HttpPost]
+        [Route("/Contact")]
+        public IActionResult Contact(Contact contact)
+        {
+            if (ModelState.IsValid)
+            {
+                _contactService.Add(contact);
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View();
+        }
+
         public IActionResult Search(string query)
         {
             if (string.IsNullOrEmpty(query))
@@ -81,18 +94,7 @@ namespace GymApp.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [HttpPost]
-        [Route("/Contact")]
-        public IActionResult Contact(Contact contact)
-        {
-            if (ModelState.IsValid) 
-            {
-                _contactService.Add(contact);
-                return RedirectToAction("Index", "Home");
-            }
-            
-            return View();
-        }
+
 
         [Route("/Sport/{id?}")]
         public IActionResult Sport(int categoryId)
