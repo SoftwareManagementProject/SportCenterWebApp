@@ -1,8 +1,10 @@
 ﻿using BusinessLayer.Abstract;
-using BusinessLayer.ValidationRules;
+using CoreLayer.Entities.Concrete;
 using EntityLayer.Concrete;
 using FluentValidation.Results;
+using GymApp.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GymApp.Controllers
@@ -11,10 +13,12 @@ namespace GymApp.Controllers
     public class RegisterController : Controller
     {
         private IMemberService _memberService;
+        private UserManager<AppUser> _userManager;
         
-        public RegisterController(IMemberService memberService) 
+        public RegisterController(IMemberService memberService, UserManager<AppUser> userManager) 
         {
             _memberService= memberService;
+            _userManager= userManager;
         }
 
         [HttpGet]
@@ -24,25 +28,38 @@ namespace GymApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(Member member)
+        public async Task<IActionResult> Index(RegisterViewModel model)
         {
-            //MemberValidator memberValidator = new MemberValidator();
-            //ValidationResult results = memberValidator.Validate(member);
-            //if(results.IsValid)
-            //{
-            //    member.MemberStatus = true;
-            //    _memberService.Add(member);
-            //    return RedirectToAction("Index", "Home");
-            //}
-            //else
-            //{
-            //    foreach(var item in results.Errors)
-            //    {
-            //        ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
-            //    }
-            //}
+            if(ModelState.IsValid)
+            {
+                AppUser user = new AppUser()
+                {
+                    FullName = model.FullName,
+                    Email = model.Email,
+                    UserName = model.Username
+                };
+                
+                var result = await _userManager.CreateAsync(user, model.Password);
 
+                if(result.Succeeded)
+                {
+                    Member member = new Member()
+                    {
+                        MemberEmail = model.Email,
+                        MemberUserName = model.Username,
+                        MemberNameSurname = model.FullName,
+                        MemberPassword = model.Password,
+                        MemberStatus = true
+                    };
+
+                    _memberService.Add(member);
+                    return RedirectToAction("Index", "Login");
+                }
+                return View(model);
+
+            }
             return View();
+
         }
     }
 }

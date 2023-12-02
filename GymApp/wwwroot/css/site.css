@@ -49,9 +49,9 @@ body {
 
 
 
-.d-block {
-    height: 600px;
-}
+/*.d-block {  height: 600px;
+  
+}*/
 
 #index-h1 {
     text-align: center;
@@ -91,6 +91,8 @@ body {
         width: 30px;
         height: 30px;
     }
+
+/*PRICING*/
 
 
 .container {

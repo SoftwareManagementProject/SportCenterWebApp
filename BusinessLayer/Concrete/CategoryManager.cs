@@ -36,6 +36,11 @@ namespace BusinessLayer.Concrete
             return _categoryDal.GetAllWithDescriptionAndImage();
         }
 
+        public List<Category> GetAllWithPackets()
+        {
+            return _categoryDal.GetAllWithPackets();
+        }
+
         public Category GetById(int id)
         {
             return _categoryDal.Get(i => i.CategoryId == id);

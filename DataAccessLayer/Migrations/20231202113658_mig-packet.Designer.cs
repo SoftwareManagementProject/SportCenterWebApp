@@ -4,6 +4,7 @@ using DataAccessLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20231202113658_mig-packet")]
+    partial class migpacket
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -122,49 +124,6 @@ namespace DataAccessLayer.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-                });
-
-            modelBuilder.Entity("EntityLayer.Concrete.Cart", b =>
-                {
-                    b.Property<int>("CartId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CartId"), 1L, 1);
-
-                    b.Property<int>("MemberId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CartId");
-
-                    b.HasIndex("MemberId")
-                        .IsUnique();
-
-                    b.ToTable("Carts");
-                });
-
-            modelBuilder.Entity("EntityLayer.Concrete.CartItem", b =>
-                {
-                    b.Property<int>("CartItemId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CartItemId"), 1L, 1);
-
-                    b.Property<int>("CartId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PacketId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CartItemId");
-
-                    b.HasIndex("CartId");
-
-                    b.HasIndex("PacketId")
-                        .IsUnique();
-
-                    b.ToTable("CartItems");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Category", b =>
@@ -565,29 +524,6 @@ namespace DataAccessLayer.Migrations
                     b.HasKey("PacketId");
 
                     b.ToTable("Packets");
-
-                    b.HasData(
-                        new
-                        {
-                            PacketId = 1,
-                            PacketDescription = "Antrenman Planı, Beslenme Planı, Haftalık Kontrol",
-                            PacketPrice = 1500.0,
-                            PacketType = "Normal"
-                        },
-                        new
-                        {
-                            PacketId = 2,
-                            PacketDescription = "Antrenman Planı, Beslenme Planı, Haftalık Kontrol, Bireysel Koç, Supplement Desteği",
-                            PacketPrice = 6000.0,
-                            PacketType = "Pro"
-                        },
-                        new
-                        {
-                            PacketId = 3,
-                            PacketDescription = "Antrenman Planı, Beslenme Planı, Haftalık Kontrol, Bireysel Koç, Supplement Desteği, Whatsapp Görüşme, Pro Sporcularla Tanışma Fırsatı",
-                            PacketPrice = 10000.0,
-                            PacketType = "Jossoft Özel"
-                        });
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.PacketCategory", b =>
@@ -796,36 +732,6 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("EntityLayer.Concrete.Cart", b =>
-                {
-                    b.HasOne("EntityLayer.Concrete.Member", "Member")
-                        .WithOne("Cart")
-                        .HasForeignKey("EntityLayer.Concrete.Cart", "MemberId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Member");
-                });
-
-            modelBuilder.Entity("EntityLayer.Concrete.CartItem", b =>
-                {
-                    b.HasOne("EntityLayer.Concrete.Cart", "Cart")
-                        .WithMany("CartItems")
-                        .HasForeignKey("CartId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EntityLayer.Concrete.Packet", "Packet")
-                        .WithOne("CartItem")
-                        .HasForeignKey("EntityLayer.Concrete.CartItem", "PacketId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Cart");
-
-                    b.Navigation("Packet");
-                });
-
             modelBuilder.Entity("EntityLayer.Concrete.Description", b =>
                 {
                     b.HasOne("EntityLayer.Concrete.Category", "Category")
@@ -967,11 +873,6 @@ namespace DataAccessLayer.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("EntityLayer.Concrete.Cart", b =>
-                {
-                    b.Navigation("CartItems");
-                });
-
             modelBuilder.Entity("EntityLayer.Concrete.Category", b =>
                 {
                     b.Navigation("Descriptions");
@@ -987,9 +888,6 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("EntityLayer.Concrete.Member", b =>
                 {
-                    b.Navigation("Cart")
-                        .IsRequired();
-
                     b.Navigation("Categories");
 
                     b.Navigation("Trainers");
@@ -997,8 +895,6 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("EntityLayer.Concrete.Packet", b =>
                 {
-                    b.Navigation("CartItem");
-
                     b.Navigation("Categories");
                 });
 

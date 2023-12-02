@@ -13,5 +13,6 @@ namespace DataAccessLayer.Abstract
         List<Category> GetAllWithDescriptionAndImage();
         Category GetWithDescriptionAndImageById(int id);
         List<Category> GetAllByMember(int memberId);
+        List<Category> GetAllWithPackets();
     }
 }

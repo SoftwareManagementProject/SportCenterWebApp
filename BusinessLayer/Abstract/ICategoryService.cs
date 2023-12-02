@@ -17,6 +17,7 @@ namespace BusinessLayer.Abstract
         Category GetByName(string name);
         List<Category> GetAllWithDescriptionAndImage();
         Category GetWithDescriptionAndImageById(int id);
+        List<Category> GetAllWithPackets();
 
     }
 }

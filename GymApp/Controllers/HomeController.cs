@@ -36,8 +36,7 @@ namespace GymApp.Controllers
                 CategoryId = i.CategoryId,
                 CategoryName = i.CategoryName,
                 CategoryInfo = i.CategoryInfo,
-                CategoryPrice = i.CategoryPrice, //AQ entityframeworkcoru navigation props çalışmıyor.
-                                                 //Not: Include method kullanmak gerekiyormuş Sorry entito
+                CategoryPrice = i.CategoryPrice, 
                 CategoryDescriptions = i.Descriptions!.Where(x => x.CategoryId == i.CategoryId).Select(x => x.DescriptionName).ToList(),
                 CategoryImages = i.Images!.Where(x => x.CategoryId == i.CategoryId).Select(x => x.ImageName).ToList()
             }).ToList();
@@ -89,7 +88,7 @@ namespace GymApp.Controllers
             var category = _categoryService.GetByName(query);
             if (category != null)
             {
-                return RedirectToAction(string.Format("{0}", category.CategoryName), "Home", new { categoryId = category.CategoryId });
+                return RedirectToAction("Sport", "Home", new { categoryId = category.CategoryId });
             }
             return RedirectToAction("Index", "Home");
         }
@@ -101,13 +100,13 @@ namespace GymApp.Controllers
         {
             var model = new CategoryDescriptionImageViewModel();
 
-            var fitness = _categoryService.GetWithDescriptionAndImageById(categoryId);
-            model.CategoryId = fitness.CategoryId;
-            model.CategoryName = fitness.CategoryName;
-            model.CategoryInfo = fitness.CategoryInfo;
-            model.CategoryPrice = fitness.CategoryPrice;
-            model.CategoryDescriptions = fitness.Descriptions!.Where(x => x.CategoryId == fitness.CategoryId).Select(x => x.DescriptionName).ToList();
-            model.CategoryImages = fitness.Images!.Where(x => x.CategoryId == fitness.CategoryId).Select(x => x.ImageName).ToList();
+            var sport = _categoryService.GetWithDescriptionAndImageById(categoryId);
+            model.CategoryId = sport.CategoryId;
+            model.CategoryName = sport.CategoryName;
+            model.CategoryInfo = sport.CategoryInfo;
+            model.CategoryPrice = sport.CategoryPrice;
+            model.CategoryDescriptions = sport.Descriptions!.Where(x => x.CategoryId == sport.CategoryId).Select(x => x.DescriptionName).ToList();
+            model.CategoryImages = sport.Images!.Where(x => x.CategoryId == sport.CategoryId).Select(x => x.ImageName).ToList();
 
 
             return View(model);

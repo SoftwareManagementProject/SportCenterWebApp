@@ -33,6 +33,14 @@ namespace DataAccessLayer.Repositories.EntityFramework
             }
         }
 
+        public List<Category> GetAllWithPackets()
+        {
+            using(Context context = new Context())
+            {
+
+                return context.Categories.Include(i => i.Packets).ThenInclude(i => i.Packet).ToList();
+            };
+        }
 
         public Category GetWithDescriptionAndImageById(int id)
         {

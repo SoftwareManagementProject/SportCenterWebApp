@@ -57,6 +57,11 @@ namespace DataAccessLayer.Repositories.InMemory
             throw new NotImplementedException();
         }
 
+        public List<Category> GetAllWithPackets()
+        {
+            throw new NotImplementedException();
+        }
+
         public Category GetWithDescriptionAndImageById(int id)
         {
             throw new NotImplementedException();

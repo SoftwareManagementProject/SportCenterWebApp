@@ -1,6 +1,8 @@
 using BusinessLayer.Abstract;
 using BusinessLayer.Concrete;
+using CoreLayer.Entities.Concrete;
 using DataAccessLayer.Abstract;
+using DataAccessLayer.Concrete;
 using DataAccessLayer.Repositories.EntityFramework;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -23,8 +25,14 @@ builder.Services.AddTransient<IContactService, ContactManager>();
 builder.Services.AddTransient<IContactDal, EfContactRepository>();
 builder.Services.AddTransient<IMemberService, MemberManager>();
 builder.Services.AddTransient<IMemberDal, EfMemberRepository>();
+builder.Services.AddTransient<IUserService, UserManager>();
+builder.Services.AddTransient<IUserDal, EfUserRepository>();
+builder.Services.AddTransient<IPacketService, PacketManager>();
+builder.Services.AddTransient<IPacketDal, EfPacketRepository>();
 
 
+
+//Authorization
 
 //builder.Services.AddMvc(config =>
 //{
@@ -35,15 +43,39 @@ builder.Services.AddTransient<IMemberDal, EfMemberRepository>();
 //    config.Filters.Add(new AuthorizeFilter(policy));
 //});
 
-//// Authorization gereken sayfalara girmeye çalýþýnca kullanýcýyý login sayfasýna yönlendirecek.
-//// Amaç kullanýcýnýn giriþ veya kayýt olmadan sayfalarý görmemesidir.
-//builder.Services.AddMvc();
+//Identity
+builder.Services.AddDbContext<Context>();
+builder.Services.AddIdentity<AppUser, AppRole>(x =>
+{
+    x.Password.RequireUppercase = false;
+    x.Password.RequireNonAlphanumeric = false;
+    x.Password.RequiredLength = 1;
+    x.Password.RequireLowercase = false;
+})
+    .AddEntityFrameworkStores<Context>();
+
+
+
+// Authorization gereken sayfalara girmeye çalýþýnca kullanýcýyý login sayfasýna yönlendirecek.
+// Amaç kullanýcýnýn giriþ veya kayýt olmadan sayfalarý görmemesidir.
+
 //builder.Services.AddAuthentication(
 //    CookieAuthenticationDefaults.AuthenticationScheme)
 //    .AddCookie(x =>
 //    {
 //        x.LoginPath = "/Login/Index";
 //    });
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.Cookie.HttpOnly = true;
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+
+    options.LoginPath = "/Login/Index";
+    options.SlidingExpiration = true;
+});
+
+
 
 
 

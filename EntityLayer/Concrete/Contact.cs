@@ -12,6 +12,7 @@ namespace EntityLayer.Concrete
     {
         [Key]
         public int ContactId { get; set; }
+        public string FullName { get; set; }
         public string ContactEmail { get; set; }
         public string ContactContent { get; set; }
     }

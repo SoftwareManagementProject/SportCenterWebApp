@@ -42,26 +42,49 @@
                         <a class="nav-link" href="/contact">Contact Us</a>
                     </li>
                 </ul>
-                <ul class="navbar-nav me-2 mb-2 mb-lg-0">
-@*                    {% if session["logged_in"] %}
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="/logout">Log Out</a>
-                    </li>
-                    {% else %}*@
-                    <li class="nav-item">
-                        <a class="nav-link" href="/login">Log In</a>
-                    </li>
-@*                    {% endif %}*@
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="/register">Sign Up</a>
-                    </li>
-                </ul>
                 <form asp-controller="Home" asp-action="Search" class="d-flex">
                     <input name="query" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="SearchBtn btn btn-outline-info" type="submit">Search</button>
+@*                    <button class="SearchBtn btn btn-outline-info" type="submit">Search</button>*@
                 </form>
+
+                <ul class="navbar-nav me-2 mb-2 mb-lg-0">
+                    @if (User.Identity.IsAuthenticated)
+                    {   
+                        <li class="nav-item">
+                            <div class="navbar-nav nav-item">
+                                <div class="dropdown text-end">
+                                      <a href="#" class="link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <img src="/images/trainer1.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
+                                      </a>
+                                      <ul class="dropdown-menu text-small">
+                                        <li><a class="dropdown-item" href="#">Paketlerim</a></li>
+                                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" href="/Logout/Index">Sign out</a></li>
+                                      </ul>
+                                </div>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <h6 class="mt-1 m-sm-1"><span>Merhaba @User.Identity.Name</span></h6>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">Log In</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/register">Sign Up</a>
+                        </li>
+                    }
+
+                </ul>
+
             </div>
         </div>
     </nav>

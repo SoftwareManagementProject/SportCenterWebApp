@@ -1,35 +1,85 @@
 ﻿@model Contact
 
-<style>
-    body {
-        font-family: sans-serif;
-    }
 
-    .emptyArea {
-        width: 100%;
-        height: 100px;
-    }
+<style>
+
+    .container {
+    width: 50%;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 8px;
+}
+
+input, textarea {
+    padding: 10px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type="submit"] {
+    background-color: #4caf50;
+    color: white;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+
+
+
+}
 </style>
 
-<div class="emptyArea"></div>
-<div class="container mx-auto w-50 ">
-    <center>
-        <h1 style="color: #62c8d2;">Contact Us</h1>
+<div class="container">
+    <h2>Contact Us</h2>
+    <form asp-controller="Home" asp-action="Contact" method="post">
+        <label asp-for="FullName">Name:</label>
+        <input type="text" id="name" asp-for="FullName" required>
 
-        <form asp-controller="Home" asp-action="Contact" method=post>
+        <label asp-for="ContactEmail">Email:</label>
+        <input type="email" id="email" asp-for="ContactEmail" required>
 
-          <div class="form-group">
-            <label for="exampleFormControlInput1">Email address</label>
-            <input asp-for="ContactEmail" type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-          </div>
+        <label asp-for="ContactContent">Message:</label>
+        <textarea id="message" asp-for="ContactContent" rows="4" required></textarea>
 
-          <div class="form-group">
-            <label for="exampleFormControlTextarea1">Example textarea</label>
-            <textarea asp-for="ContactContent" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-          </div>
-            <button type="submit" class="btn btn-success btn-lg mt-3">SEND</button>
-        </form>
-    </center>
-
+        <input type="submit" value="Submit">
+    </form>
 </div>
+<button class="btn btn-outline-primary" id="addedContact">CLICK</button>
+
 <div class="myDiv" style="margin-bottom:100px;"></div>
+
+@section Scripts{
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="text/javascript">
+        const Swal = require('sweetalert2');
+        $("#addedContact").click(function(){
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Your work has been saved",
+              showConfirmButton: false,
+              timer: 1500
+            });
+
+        });
+
+    </script>
+}

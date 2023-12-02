@@ -1,4 +1,5 @@
-﻿using EntityLayer.Concrete;
+﻿using CoreLayer.Entities.Concrete;
+using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Concrete
 {
-    public class Context : DbContext
+    public class Context : IdentityDbContext<AppUser, AppRole, int>
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -26,6 +27,9 @@ namespace DataAccessLayer.Concrete
 
             modelBuilder.Entity<MemberTrainer>()
                 .HasKey(x => new { x.MemberId, x.TrainerId });
+
+            modelBuilder.Entity<PacketCategory>()
+                .HasKey(x => new { x.PacketId, x.CategoryId });
 
             modelBuilder.Entity<Category>()
                 .HasData(
@@ -86,6 +90,13 @@ namespace DataAccessLayer.Concrete
 
                 );
 
+            modelBuilder.Entity<Packet>()
+                .HasData(
+                    new Packet() { PacketId = 1, PacketType = "Normal", PacketPrice = 1500, PacketDescription = "Antrenman Planı, Beslenme Planı, Haftalık Kontrol" },
+                    new Packet() { PacketId = 2, PacketType = "Pro", PacketPrice = 6000, PacketDescription = "Antrenman Planı, Beslenme Planı, Haftalık Kontrol, Bireysel Koç, Supplement Desteği" },
+                    new Packet() { PacketId = 3, PacketType = "Jossoft Özel", PacketPrice = 10000, PacketDescription = "Antrenman Planı, Beslenme Planı, Haftalık Kontrol, Bireysel Koç, Supplement Desteği, Whatsapp Görüşme, Pro Sporcularla Tanışma Fırsatı" }
+                );
+
             base.OnModelCreating(modelBuilder);
         }
 
@@ -97,5 +108,9 @@ namespace DataAccessLayer.Concrete
         public DbSet<Image> Images { get; set; }
         public DbSet<MemberCategory> MemberCategories { get; set; }
         public DbSet<MemberTrainer> MemberTrainers { get; set; }
+        public DbSet<Packet> Packets { get; set; }
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
+
     }
 }
