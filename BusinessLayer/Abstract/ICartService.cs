@@ -14,6 +14,7 @@ namespace BusinessLayer.Abstract
         void Delete(Cart cart);
         List<Cart> GetAll();
         Cart GetById(int id);
+        Cart GetByMemberUsername(string username);
 
     }
 }

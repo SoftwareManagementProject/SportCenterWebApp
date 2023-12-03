@@ -1,5 +1,4 @@
-﻿using CoreLayer.DataAccess.Entities;
-using DataAccessLayer.Abstract;
+﻿using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
 using EntityLayer.Concrete;
 using System;

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CoreLayer.DataAccess.Entities
+namespace CoreLayer.Entities
 {
     public interface IEntity
     {

@@ -10,5 +10,6 @@ namespace DataAccessLayer.Abstract
 {
     public interface ICartItemDal : IEntityRepositoryBase<CartItem>
     {
+        List<CartItem> GetAllByMemberUsername(string username);
     }
 }

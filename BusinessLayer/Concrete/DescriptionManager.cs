@@ -1,5 +1,4 @@
 ﻿using BusinessLayer.Abstract;
-using CoreLayer.DataAccess.Entities;
 using DataAccessLayer.Abstract;
 using EntityLayer.Concrete;
 using System;

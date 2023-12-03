@@ -14,5 +14,8 @@ namespace BusinessLayer.Abstract
         void Delete(CartItem cartItem);
         List<CartItem> GetAll();
         CartItem GetById(int id);
+        CartItem GetByCartId(int id);
+        List<CartItem> GetAllByMemberUsername(string username);
+        bool CheckIfPacketNotExistBefore(int packetId, int cartId);
     }
 }

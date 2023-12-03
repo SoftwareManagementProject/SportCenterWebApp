@@ -37,6 +37,11 @@ namespace BusinessLayer.Concrete
             return _cartDal.Get(i => i.CartId == id);
         }
 
+        public Cart GetByMemberUsername(string username)
+        {
+            return  _cartDal.GetByMemberUsername(username);
+        }
+
         public void Update(Cart cart)
         {
             _cartDal.Update(cart);

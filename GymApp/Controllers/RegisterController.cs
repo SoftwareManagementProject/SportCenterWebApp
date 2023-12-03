@@ -14,11 +14,13 @@ namespace GymApp.Controllers
     {
         private IMemberService _memberService;
         private UserManager<AppUser> _userManager;
+        private ICartService _cartService;
         
-        public RegisterController(IMemberService memberService, UserManager<AppUser> userManager) 
+        public RegisterController(IMemberService memberService, UserManager<AppUser> userManager, ICartService cartService) 
         {
             _memberService= memberService;
             _userManager= userManager;
+            _cartService = cartService;
         }
 
         [HttpGet]
@@ -51,8 +53,16 @@ namespace GymApp.Controllers
                         MemberPassword = model.Password,
                         MemberStatus = true
                     };
-
+                    
                     _memberService.Add(member);
+
+                    Cart cart = new Cart()
+                    {
+                        MemberId = member.MemberId
+                    };
+
+                    _cartService.Add(cart);
+
                     return RedirectToAction("Index", "Login");
                 }
                 return View(model);

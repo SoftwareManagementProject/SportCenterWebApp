@@ -23,6 +23,11 @@ namespace BusinessLayer.Concrete
             _cartItemDal.Add(cartItem);
         }
 
+        public bool CheckIfPacketNotExistBefore(int packetId, int cartId)
+        {
+            return _cartItemDal.Get(i => i.PacketId == packetId && i.CartId == cartId) == null;
+        }
+
         public void Delete(CartItem cartItem)
         {
             _cartItemDal.Delete(cartItem);
@@ -32,6 +37,16 @@ namespace BusinessLayer.Concrete
         public List<CartItem> GetAll()
         {
             return _cartItemDal.GetAll();
+        }
+
+        public List<CartItem> GetAllByMemberUsername(string username)
+        {
+            return _cartItemDal.GetAllByMemberUsername(username);
+        }
+
+        public CartItem GetByCartId(int id)
+        {
+            return _cartItemDal.Get(i => i.CartId == id);
         }
 
         public CartItem GetById(int id)

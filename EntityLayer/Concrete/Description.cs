@@ -1,4 +1,4 @@
-﻿using CoreLayer.DataAccess.Entities;
+﻿using CoreLayer.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

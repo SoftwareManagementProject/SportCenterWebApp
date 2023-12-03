@@ -29,8 +29,10 @@ builder.Services.AddTransient<IUserService, UserManager>();
 builder.Services.AddTransient<IUserDal, EfUserRepository>();
 builder.Services.AddTransient<IPacketService, PacketManager>();
 builder.Services.AddTransient<IPacketDal, EfPacketRepository>();
-
-
+builder.Services.AddTransient<ICartService, CartManager>();
+builder.Services.AddTransient<ICartDal, EfCartRepository>();
+builder.Services.AddTransient<ICartItemService, CartItemManager>();
+builder.Services.AddTransient<ICartItemDal, EfCartItemRepository>();
 
 //Authorization
 

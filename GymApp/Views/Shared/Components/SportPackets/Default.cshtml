@@ -31,7 +31,15 @@
                             }
 
                         </ul>
-                        <a href="#" class="btn btn-block btn-primary text-uppercase">Get Started</a>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a href="/Cart/AddToCart?packetId=@p.PacketId" class="btn btn-block btn-primary text-uppercase">Get Started</a>
+
+                        }
+                        else
+                        {
+                            <a href="/Login/Index" class="btn btn-block btn-primary text-uppercase">Get Started</a>
+                        }
                     </div>
                 </div>
             </div>            

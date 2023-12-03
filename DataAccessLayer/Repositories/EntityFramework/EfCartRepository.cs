@@ -12,5 +12,17 @@ namespace DataAccessLayer.Repositories.EntityFramework
 {
     public class EfCartRepository : EfEntityRepositoryBase<Cart, Context>, ICartDal
     {
+        public Cart GetByMemberUsername(string username)
+        {
+            using(Context context = new Context())
+            {
+                return (from m in context.Members
+                        join c in context.Carts
+                        on m.MemberId equals c.MemberId
+                        where m.MemberUserName == username
+                        select c
+                        ).First();
+            };
+        }
     }
 }
