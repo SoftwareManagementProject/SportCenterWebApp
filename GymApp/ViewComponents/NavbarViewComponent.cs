@@ -9,14 +9,19 @@ namespace GymApp.ViewComponents
     {
 
         private readonly ICategoryService _categoryService;
+        private ICartItemService _cartItemService;
 
-        public NavbarViewComponent(ICategoryService categoryService)
+        public NavbarViewComponent(ICategoryService categoryService, ICartItemService cartItemService)
         {
             _categoryService = categoryService;
+            _cartItemService = cartItemService;
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var items = await GetItemsAsync();
+            ViewBag.numberOfCartItem = _cartItemService.GetAllByMemberUsername(User.Identity.Name).Count;
+
+
             return View(items);
         }
 

@@ -15,5 +15,6 @@ namespace EntityLayer.Concrete
         public string PacketType { get; set; }
         public List<PacketCategory>? Categories { get; set; }
         public CartItem? CartItem { get; set; }
+        public List<OrderDetails> OrderDetails { get; set; }
     }
 }

@@ -20,5 +20,6 @@ namespace EntityLayer.Concrete
         public List<MemberCategory>? Categories { get; set; }
         public List<MemberTrainer>? Trainers { get; set; }
         public Cart Cart { get; set; }
+
     }
 }

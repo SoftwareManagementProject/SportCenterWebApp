@@ -75,3 +75,35 @@
 
 
 
+@section Scripts{
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script >
+            let packet = "@ViewBag.packet";
+            let shipping = "@ViewBag.Shipping";
+            if(packet === "ExistInCart"){
+                Swal.fire({
+                  icon: "error",
+                  title: "Oops...",
+                  text: "Zaten bu paket sepetinizde mevcut!",
+                });
+
+            };
+            if(packet === "ExistInPackets"){
+                Swal.fire({
+                    icon: "error",
+                    title: "Oops...",
+                    text: "Zaten bu pakete sahipsiniz!",
+                });
+
+            };
+            if(shipping === "true"){
+                Swal.fire({
+                  position: "top-end",
+                  icon: "success",
+                  title: "Paketinizi başarılı bir şekilde satın aldınız",
+                  showConfirmButton: false,
+                  timer: 1500
+                });
+            }
+        </script>
+}

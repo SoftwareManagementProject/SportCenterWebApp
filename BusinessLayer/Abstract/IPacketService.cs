@@ -14,5 +14,6 @@ namespace BusinessLayer.Abstract
         void Update(Packet packet);
         List<Packet> GetAll();
         Packet GetById(int id);
+        List<Packet> GetAllByUsername(string username);
     }
 }

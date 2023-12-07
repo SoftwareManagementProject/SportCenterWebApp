@@ -111,6 +111,10 @@ namespace DataAccessLayer.Concrete
         public DbSet<Packet> Packets { get; set; }
         public DbSet<Cart> Carts { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
+        public DbSet<Shipping> Shippings { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderDetails> OrderDetails { get; set; }
+
 
     }
 }

@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Abstract
 {
-    public interface IPacketDal : IEntityRepositoryBase<Packet>
+    public interface IOrderDal : IEntityRepositoryBase<Order>
     {
-        List<Packet> GetAllByUsername(string username);
     }
 }

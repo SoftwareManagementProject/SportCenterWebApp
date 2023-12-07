@@ -21,6 +21,11 @@ namespace BusinessLayer.Concrete
             _cartDal.Add(cart);
         }
 
+        public void ClearCart(List<CartItem> cartItems)
+        {
+            _cartDal.ClearCart(cartItems);
+        }
+
         public void Delete(Cart cart)
         {
             _cartDal.Delete(cart);

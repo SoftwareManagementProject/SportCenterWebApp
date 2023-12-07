@@ -33,6 +33,15 @@ builder.Services.AddTransient<ICartService, CartManager>();
 builder.Services.AddTransient<ICartDal, EfCartRepository>();
 builder.Services.AddTransient<ICartItemService, CartItemManager>();
 builder.Services.AddTransient<ICartItemDal, EfCartItemRepository>();
+builder.Services.AddTransient<ICartItemService, CartItemManager>();
+builder.Services.AddTransient<ICartItemDal, EfCartItemRepository>();
+builder.Services.AddTransient<IShippingService, ShippingManager>();
+builder.Services.AddTransient<IShippingDal, EfShippingRepository>();
+builder.Services.AddTransient<IOrderService, OrderManager>();
+builder.Services.AddTransient<IOrderDal, EfOrderRepository>();
+builder.Services.AddTransient<IOrderDetailsService, OrderDetailsManager>();
+builder.Services.AddTransient<IOrderDetailsDal, EfOrderDetailsRepository>();
+
 
 //Authorization
 
@@ -71,7 +80,7 @@ builder.Services.AddIdentity<AppUser, AppRole>(x =>
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.Cookie.HttpOnly = true;
-    options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(10);
 
     options.LoginPath = "/Login/Index";
     options.SlidingExpiration = true;

@@ -11,5 +11,6 @@ namespace DataAccessLayer.Abstract
     public interface ICartDal : IEntityRepositoryBase<Cart>
     {
         Cart GetByMemberUsername(string username);
+        void ClearCart(List<CartItem> cartItems);
     }
 }

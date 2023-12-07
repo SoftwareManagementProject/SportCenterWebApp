@@ -17,15 +17,18 @@ namespace GymApp.Controllers
         private ICategoryService _categoryService;
         private ITrainerService _trainerService;
         private IContactService _contactService;
-
+        private IPacketService _packetService;
+        
         public HomeController(ILogger<HomeController> logger, ICategoryService categoryService, ITrainerService trainerService,
-            IContactService contactService
+            IContactService contactService, IPacketService packetService
             )
         {
             _logger = logger;
             _categoryService = categoryService;
             _trainerService = trainerService;
             _contactService = contactService;
+            _packetService = packetService;
+
         }
 
         public IActionResult Index()
@@ -40,6 +43,9 @@ namespace GymApp.Controllers
                 CategoryDescriptions = i.Descriptions!.Where(x => x.CategoryId == i.CategoryId).Select(x => x.DescriptionName).ToList(),
                 CategoryImages = i.Images!.Where(x => x.CategoryId == i.CategoryId).Select(x => x.ImageName).ToList()
             }).ToList();
+
+            ViewBag.packet = TempData["packet"] as string;
+            ViewBag.Shipping = TempData["Shipping"] as string;
 
             return View(categories);
         }
@@ -112,6 +118,12 @@ namespace GymApp.Controllers
             return View(model);
         }
 
+        [Route("/{username?}/Packets")]
+        public IActionResult Packets()
+        {
+            var packets = _packetService.GetAllByUsername(User.Identity.Name);
+            return View(packets);
+        }
 
     }
 }

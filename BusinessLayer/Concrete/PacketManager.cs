@@ -33,6 +33,11 @@ namespace BusinessLayer.Concrete
             return _packetDal.GetAll();
         }
 
+        public List<Packet> GetAllByUsername(string username)
+        {
+            return _packetDal.GetAllByUsername(username);
+        }
+
         public Packet GetById(int id)
         {
             return _packetDal.Get(i => i.PacketId == id);

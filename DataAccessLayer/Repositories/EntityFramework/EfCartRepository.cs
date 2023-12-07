@@ -12,6 +12,19 @@ namespace DataAccessLayer.Repositories.EntityFramework
 {
     public class EfCartRepository : EfEntityRepositoryBase<Cart, Context>, ICartDal
     {
+        public void ClearCart(List<CartItem> cartItems)
+        {
+            using (Context context = new Context())
+            {
+                foreach(var i in cartItems)
+                {
+                    context.CartItems.Remove(i);
+                }
+
+                context.SaveChanges();
+            };
+        }
+
         public Cart GetByMemberUsername(string username)
         {
             using(Context context = new Context())
