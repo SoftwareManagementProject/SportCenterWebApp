@@ -4,10 +4,15 @@ using BusinessLayer.Abstract;
 using EntityLayer.Concrete;
 using GymApp.Models;
 using Microsoft.AspNetCore.Mvc;
+using OpenAI_API.Completions;
+using OpenAI_API;
 using System.Diagnostics;
 using System.Net.Mail;
 using System.Runtime.CompilerServices;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using OpenAI_API.Chat;
+using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace GymApp.Controllers
 {
@@ -78,6 +83,8 @@ namespace GymApp.Controllers
             if (ModelState.IsValid)
             {
                 _contactService.Add(contact);
+                Thread.Sleep(3000);
+                
                 return RedirectToAction("Index", "Home");
             }
 
@@ -123,6 +130,47 @@ namespace GymApp.Controllers
         {
             var packets = _packetService.GetAllByUsername(User.Identity.Name);
             return View(packets);
+        }
+
+        public async Task<IActionResult> ChatBot(string prompt)
+        {
+
+            if(ModelState.IsValid)
+            {
+                string apiKey = "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";
+                var openai = new OpenAIAPI(apiKey);
+
+                ChatRequest chat = new ChatRequest()
+                {
+                    Messages= new List<ChatMessage>()
+                    {
+                        new ChatMessage(ChatMessageRole.User, prompt)
+                    },
+                    Model = "gpt-3.5-turbo",
+                    MaxTokens= 100,
+                };
+
+                var result = await openai.Chat.CreateChatCompletionAsync(chat);
+
+                if (result != null)
+                {
+                    var answer = result.Choices[0].Message.Content;
+                    var jsonAnswer = JsonConvert.SerializeObject(answer);
+                    return Json(jsonAnswer);
+                }
+                else
+                {
+                    var answer = "I don't have any idea";
+                    return Json(answer);
+                }
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult GetChatBot()
+        {
+            return PartialView("ChatBotPartial");
         }
 
     }

@@ -3,6 +3,29 @@
     ViewData["Title"] = "Home Page";
 }
 
+@*<style>
+    #chatField{
+        border-width:3px;
+        background-color:#fff;
+        border-style:solid;
+        position:fixed;
+        padding:7px;
+        bottom:0;
+        right:0;
+        max-width:450px;
+        z-index:999;
+        text-align: center;
+    }
+
+</style>
+
+<div id="chatField" cla>
+    <div class="chatDiv" style="display:inline-block">
+        <p>CHATBOT</p>
+        <button id="expandBtn" class="btn btn-primary btn-sm">O</button>
+    </div>
+</div>*@
+
 
 
 <section id="homeCarousel">
@@ -71,39 +94,52 @@
 </section>
 
 @await Component.InvokeAsync("SportPackets")
-
-
+@await Html.PartialAsync("ChatBotPartial")
 
 
 @section Scripts{
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script >
-            let packet = "@ViewBag.packet";
-            let shipping = "@ViewBag.Shipping";
-            if(packet === "ExistInCart"){
-                Swal.fire({
-                  icon: "error",
-                  title: "Oops...",
-                  text: "Zaten bu paket sepetinizde mevcut!",
-                });
+            $(document).ready(function() {
+                //$("#expandBtn").click(function(){
+                //    $.ajax({
+                //        type:"Get",
+                //        url: "/Home/GetChatBot",
+                //        success: function(func){
+                //            $(".chatDiv").css("display", "none");
+                //            $("#chatField").html(func);
+                //        }
+                //    });
+                //});
 
-            };
-            if(packet === "ExistInPackets"){
-                Swal.fire({
-                    icon: "error",
-                    title: "Oops...",
-                    text: "Zaten bu pakete sahipsiniz!",
-                });
 
-            };
-            if(shipping === "true"){
-                Swal.fire({
-                  position: "top-end",
-                  icon: "success",
-                  title: "Paketinizi başarılı bir şekilde satın aldınız",
-                  showConfirmButton: false,
-                  timer: 1500
-                });
-            }
+                let packet = "@ViewBag.packet";
+                let shipping = "@ViewBag.Shipping";
+                if(packet === "ExistInCart"){
+                    Swal.fire({
+                      icon: "error",
+                      title: "Oops...",
+                      text: "Zaten bu paket sepetinizde mevcut!",
+                    });
+
+                };
+                if(packet === "ExistInPackets"){
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Zaten bu pakete sahipsiniz!",
+                    });
+
+                };
+                if(shipping === "true"){
+                    Swal.fire({
+                      position: "top-end",
+                      icon: "success",
+                      title: "Paketinizi başarılı bir şekilde satın aldınız",
+                      showConfirmButton: false,
+                      timer: 1500
+                    });
+                }
+            });
         </script>
 }

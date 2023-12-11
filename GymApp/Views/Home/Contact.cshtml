@@ -59,10 +59,9 @@ input[type="submit"]:hover {
         <label asp-for="ContactContent">Message:</label>
         <textarea id="message" asp-for="ContactContent" rows="4" required></textarea>
 
-        <input type="submit" value="Submit">
+        <input id="addedContact" type="submit" value="Submit">
     </form>
 </div>
-<button class="btn btn-outline-primary" id="addedContact">CLICK</button>
 
 <div class="myDiv" style="margin-bottom:100px;"></div>
 
@@ -71,11 +70,9 @@ input[type="submit"]:hover {
     <script type="text/javascript">
         $("#addedContact").click(function(){
             Swal.fire({
-              position: "top-end",
-              icon: "success",
-              title: "Your work has been saved",
-              showConfirmButton: false,
-              timer: 1500
+              title: "Good job!",
+              text: "Mesajınız alındı Size geri dönüş yapılacaktır!",
+              icon: "success"
             });
 
         });
