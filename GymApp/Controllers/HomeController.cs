@@ -1,6 +1,4 @@
-﻿
-
-using BusinessLayer.Abstract;
+﻿using BusinessLayer.Abstract;
 using EntityLayer.Concrete;
 using GymApp.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -23,9 +21,10 @@ namespace GymApp.Controllers
         private ITrainerService _trainerService;
         private IContactService _contactService;
         private IPacketService _packetService;
+        private IConfiguration _configuration;
         
         public HomeController(ILogger<HomeController> logger, ICategoryService categoryService, ITrainerService trainerService,
-            IContactService contactService, IPacketService packetService
+            IContactService contactService, IPacketService packetService, IConfiguration configuration
             )
         {
             _logger = logger;
@@ -33,7 +32,7 @@ namespace GymApp.Controllers
             _trainerService = trainerService;
             _contactService = contactService;
             _packetService = packetService;
-
+            _configuration = configuration;
         }
 
         public IActionResult Index()
@@ -137,7 +136,7 @@ namespace GymApp.Controllers
 
             if(ModelState.IsValid)
             {
-                string apiKey = "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";
+                string apiKey = _configuration["ApiKeys:OpenAi"];
                 var openai = new OpenAIAPI(apiKey);
 
                 ChatRequest chat = new ChatRequest()

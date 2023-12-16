@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GymApp.Controllers
 {
-    [AllowAnonymous]
     public class RegisterController : Controller
     {
         private IMemberService _memberService;

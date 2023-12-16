@@ -12,7 +12,7 @@ using System.Security.Claims;
 
 namespace GymApp.Controllers
 {
-    [AllowAnonymous]
+
     public class LoginController : Controller
     {
         private IUserService _userService;
